@@ -1,0 +1,52 @@
+# Require your plugins here
+require 'robut/plugin/twss'
+require 'robut/storage/yaml_store'
+require 'robut/plugin/ping'
+require 'robut/plugin/weather'
+require 'robut/plugin/meme'
+require 'robut/plugin/lunch'
+require 'robut/plugin/later'
+require 'robut/plugin/say'
+require 'robut/plugin/echo'
+require 'robut/plugin/calc'
+require 'robut/plugin/help'
+require 'robut/plugin/memepng'
+
+# Add the plugin classes to the Robut plugin list.
+# Plugins are handled in the order that they appear in this array.
+Robut::Plugin.plugins << Robut::Plugin::TWSS
+Robut::Plugin.plugins << Robut::Plugin::Calc
+Robut::Plugin.plugins << Robut::Plugin::Meme
+Robut::Plugin.plugins << Robut::Plugin::Lunch
+Robut::Plugin.plugins << Robut::Plugin::Ping
+Robut::Plugin.plugins << Robut::Plugin::Echo
+Robut::Plugin.plugins << Robut::Plugin::Later
+Robut::Plugin.plugins << Robut::Plugin::Say
+Robut::Plugin.plugins << Robut::Plugin::Weather
+Robut::Plugin.plugins << Robut::Plugin::Help
+Robut::Plugin.plugins << Robut::Plugin::Memepng
+
+# Configure the robut jabber connection and you're good to go!
+Robut::Connection.configure do |config|
+  # Note that the jid must end with /bot if you don't want robut to
+  # spam the channel, as described by the last bullet point on this
+  # page: https://www.hipchat.com/help/category/xmpp
+  config.jid = '26894_944966@chat.hipchat.com/bot'
+  config.password = 'sterilizedPass'
+  config.nick = 'Support Bot'
+  config.room = '26894_support@conf.hipchat.com'
+
+  # Custom @mention name
+  # config.mention_name = 'Bot'
+    config.mention_name = 'bot'
+
+  # Ignore personal messages
+  # config.enable_private_messaging = false
+    config.enable_private_messaging = false
+  # Some plugins require storage
+  Robut::Storage::YamlStore.file = ".robut"
+  config.store = Robut::Storage::YamlStore
+
+  # Add a logger if you want to debug the connection
+  # config.logger = Logger.new(STDOUT)
+end
